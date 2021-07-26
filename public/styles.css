@@ -4,7 +4,7 @@ html, body {
     margin:0;
     padding: 0;
     padding-top: 10px;
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     text-align: center;
 }
 
@@ -13,7 +13,7 @@ body {
 }
 
 button {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     display: block;
     margin: 0 auto;
     border: none;
@@ -23,13 +23,17 @@ button {
     text-transform: uppercase;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 h1 {
     font-size: 20px;
     text-align:center;
 }
 
 textarea {
-    font-family: 'Press Start 2P', cursive;
+    font-family: 'Press Start 2P';
     border: 3px solid black;
     width: 90%;
     margin: 0 auto;
@@ -37,4 +41,8 @@ textarea {
     height: 200px;
     background: #00b800;
     padding: 10px;
+}
+
+textarea:disabled {
+    background-color: #a5a2a2;
 }
