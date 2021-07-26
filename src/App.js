@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react"
 
 function App() {
-    const STARTING_TIME = 5
+    const STARTING_TIME = 15
 
     //creating states to hold text and time displayed on countdown timer
     const [text, setText] = useState("")
@@ -11,6 +11,7 @@ function App() {
     const [isTimeRunning, setIsTimeRunning] = useState(false)
     //storing wordCount as separate state to text (to store for indiv. games vs realtime tracking)
     const [wordCount, setWordCount] = useState(0)
+    const [wordsPerMinute, setWordsPerMinute] = useState(0)
 
     function handleChange(event) {
         //destructuring event.target.value to grab input when event is fired:
@@ -27,12 +28,17 @@ function App() {
         return spaceRemoved.length
     }
 
+    function calculateTypingSpeed(text) {
+        return wordCount * 4
+    }
+
     function startGame() {
         setIsTimeRunning(true)
         setTimeRemaining(STARTING_TIME)
         //refreshing the input box, which updates according to text stored as state
         setText("")
         setWordCount(0)
+        setWordsPerMinute(0)
     }
 
     function endGame() {
@@ -40,6 +46,7 @@ function App() {
         //grabbing text input as string, calculate number of words,
         //then store it to wordCount state
         setWordCount(calculateWordCount(text))
+        setWordsPerMinute(calculateTypingSpeed(text))
     }
 
     //useEffect is run when component updates,
@@ -71,7 +78,8 @@ function App() {
             <button
                 onClick={startGame}
                 disabled={isTimeRunning}>START</button>
-            <h1>Word count: {wordCount}</h1>
+            <h1>Speed: {wordsPerMinute} wpm</h1>
+            <p5>Word count: {wordCount}</p5>
         </>
     )
 }

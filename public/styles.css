@@ -17,7 +17,6 @@ button {
     display: block;
     margin: 0 auto;
     border: none;
-    background: #a80020;
     background: #00b800;
     padding: 10px 20px;
     text-transform: uppercase;
@@ -35,7 +34,7 @@ h1 {
 textarea {
     font-family: 'Press Start 2P';
     border: 3px solid black;
-    width: 90%;
+    width: 50%;
     margin: 0 auto;
     outline: none;
     height: 200px;
@@ -45,4 +44,8 @@ textarea {
 
 textarea:disabled {
     background-color: #a5a2a2;
+}
+
+p5 {
+    padding-top: 5px;
 }
