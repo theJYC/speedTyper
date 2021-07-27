@@ -40,14 +40,20 @@ function App() {
     }
 
     function calculateRelativeSpeed(number) {
-        if (number === 40) {
+        if (number < 25) {
+            return "slow"
+        }
+        else if (number < 45) {
             return "avg"
         }
-        else if (number > 40) {
+        else if (number < 60) {
+            return "fluent"
+        }
+        else if (number < 80) {
             return "fast"
         }
-        else if (number < 40) {
-            return "slow"
+        else {
+            return "pro"
         }
     }
 
@@ -55,8 +61,18 @@ function App() {
         let text = ""
         let color = {}
 
-        if (relativeSpeed === "avg") {
+        if (relativeSpeed === "slow") {
+            text = "slow"
+            color = {color: "red"}
+        }
+
+        else if (relativeSpeed === "avg") {
             text = "average"
+            color = {color: "orange"}
+        }
+
+        else if (relativeSpeed === "fluent") {
+            text = "fluent"
             color = {color: "yellow"}
         }
 
@@ -65,9 +81,9 @@ function App() {
             color = {color: "blue"}
         }
 
-        else if (relativeSpeed === "slow") {
-            text = "slow"
-            color = {color: "red"}
+        else if (relativeSpeed === "pro") {
+            text = "pro"
+            color = {color: "purple"}
         }
 
         return (
