@@ -137,10 +137,10 @@ function useTypingGame(startingTime = 15) {
         textBoxRef,
         handleChange,
         text,
-        isTimeRunning,,
+        isTimeRunning,
         timeRemaining,
         startGame,
-        wordsperMinute,
+        wordsPerMinute,
         wordCount,
         colorify,
         relativeSpeed

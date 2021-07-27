@@ -8,10 +8,10 @@ function App() {
         textBoxRef,
         handleChange,
         text,
-        isTimeRunning,,
+        isTimeRunning,
         timeRemaining,
         startGame,
-        wordsperMinute,
+        wordsPerMinute,
         wordCount,
         colorify,
         relativeSpeed
