@@ -52,21 +52,27 @@ function App() {
     }
 
     function colorify(relativeSpeed) {
+        let text = ""
+        let color = {}
+
         if (relativeSpeed === "avg") {
-            return (
-                <h2 style={{color: "yellow"}}>average</h2>
-            )
+            text = "average"
+            color = {color: "yellow"}
         }
+
         else if (relativeSpeed === "fast") {
-            return (
-                <h2 style={{color: "blue"}}>fast</h2>
-            )
+            text = "fast"
+            color = {color: "blue"}
         }
+
         else if (relativeSpeed === "slow") {
-            return (
-                <h2 style={{color: "red"}}>slow</h2>
-            )
+            text = "slow"
+            color = {color: "red"}
         }
+
+        return (
+            <h2 style={color}>{text}</h2>
+        )
     }
 
     function startGame() {
@@ -123,8 +129,8 @@ function App() {
                 onClick={startGame}
                 disabled={isTimeRunning}>START</button>
             <h1>Speed: {wordsPerMinute} wpm</h1>
-            {colorify(relativeSpeed)}
             <p5>Word Count: {wordCount}</p5>
+            {colorify(relativeSpeed)}
         </>
     )
 }
