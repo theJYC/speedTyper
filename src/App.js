@@ -1,17 +1,24 @@
-import React, { useState , useEffect } from "react"
+import React, { useState , useEffect, useRef } from "react"
 
 function App() {
     const STARTING_TIME = 15
 
     //creating states to hold text and time displayed on countdown timer
     const [text, setText] = useState("")
-    //storing the state as 5 (seconds) as initial
     const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME)
+
     //storing isTimeRunning as a boolean state variable (false by default) to fire timer upon START button click
     const [isTimeRunning, setIsTimeRunning] = useState(false)
     //storing wordCount as separate state to text (to store for indiv. games vs realtime tracking)
     const [wordCount, setWordCount] = useState(0)
+
+    //secondary calculations based on wordCount
     const [wordsPerMinute, setWordsPerMinute] = useState(0)
+    const [relativeSpeed, setRelativeSpeed] = useState("")
+
+    //grabbing textarea dom element in order to be auto-focused in upon START btn click
+    //standard practice to set useRef to null.
+    const textBoxRef = useRef(null)
 
     function handleChange(event) {
         //destructuring event.target.value to grab input when event is fired:
@@ -28,8 +35,38 @@ function App() {
         return spaceRemoved.length
     }
 
-    function calculateTypingSpeed(text) {
+    function calculateTypingSpeed(number) {
         return wordCount * 4
+    }
+
+    function calculateRelativeSpeed(number) {
+        if (number === 40) {
+            return "avg"
+        }
+        else if (number > 40) {
+            return "fast"
+        }
+        else if (number < 40) {
+            return "slow"
+        }
+    }
+
+    function colorify(relativeSpeed) {
+        if (relativeSpeed === "avg") {
+            return (
+                <h2 style={{color: "yellow"}}>average</h2>
+            )
+        }
+        else if (relativeSpeed === "fast") {
+            return (
+                <h2 style={{color: "blue"}}>fast</h2>
+            )
+        }
+        else if (relativeSpeed === "slow") {
+            return (
+                <h2 style={{color: "red"}}>slow</h2>
+            )
+        }
     }
 
     function startGame() {
@@ -39,6 +76,11 @@ function App() {
         setText("")
         setWordCount(0)
         setWordsPerMinute(0)
+        setRelativeSpeed("")
+
+        //to focus on textarea upon START btn click
+        textBoxRef.current.disabled = false
+        textBoxRef.current.focus()
     }
 
     function endGame() {
@@ -47,6 +89,7 @@ function App() {
         //then store it to wordCount state
         setWordCount(calculateWordCount(text))
         setWordsPerMinute(calculateTypingSpeed(text))
+        setRelativeSpeed(calculateRelativeSpeed(calculateTypingSpeed(text)))
     }
 
     //useEffect is run when component updates,
@@ -61,7 +104,7 @@ function App() {
         }
         //when count reaches 0, set the isTimeRunning variable back to false:
         else if (timeRemaining === 0) {
-                endGame()
+            endGame()
         }
 
     }, [timeRemaining, isTimeRunning])
@@ -70,6 +113,7 @@ function App() {
         <>
             <h1>Speed Typer</h1>
             <textarea
+                ref={textBoxRef}
                 onChange={handleChange}
                 value={text}
                 disabled={!isTimeRunning}
@@ -79,10 +123,10 @@ function App() {
                 onClick={startGame}
                 disabled={isTimeRunning}>START</button>
             <h1>Speed: {wordsPerMinute} wpm</h1>
-            <p5>Word count: {wordCount}</p5>
+            {colorify(relativeSpeed)}
+            <p5>Word Count: {wordCount}</p5>
         </>
     )
 }
 
 export default App
-
