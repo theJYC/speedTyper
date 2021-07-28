@@ -69,27 +69,27 @@ function useTypingGame(startingTime = 15) {
             text = "SLOW"
             //assigning style object with key of color
             //and value of "red" (ie. {color: "red"})
-            style[color] = "red"
+            style["color"] = "red"
         }
 
         else if (relativeSpeed === "avg") {
             text = "AVERAGE"
-            style[color] = "orange"
+            style["color"] = "orange"
         }
 
         else if (relativeSpeed === "fluent") {
             text = "FAST"
-            style[color] = "yellow"
+            style["color"] = "yellow"
         }
 
         else if (relativeSpeed === "fast") {
             text = "ADVANCED"
-            style[color] = "cornflowerblue"
+            style["color"] = "cornflowerblue"
         }
 
         else if (relativeSpeed === "pro") {
             text = "PRO"
-            style[color] = "purple"
+            style["color"] = "purple"
         }
 
         return (
