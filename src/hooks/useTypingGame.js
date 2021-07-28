@@ -59,37 +59,41 @@ function useTypingGame(startingTime = 15) {
         }
     }
 
+    //to conditionally render the relativeSpeed text, with its respective color scheme
     function colorify(relativeSpeed) {
         let text = ""
-        let color = {}
+        //initialising style to an obj to plug style attribute directly to JSX
+        let style = {}
 
         if (relativeSpeed === "slow") {
             text = "SLOW"
-            color = {color: "red"}
+            //assigning style object with key of color
+            //and value of "red" (ie. {color: "red"})
+            style[color] = "red"
         }
 
         else if (relativeSpeed === "avg") {
             text = "AVERAGE"
-            color = {color: "orange"}
+            style[color] = "orange"
         }
 
         else if (relativeSpeed === "fluent") {
-            text = "FLUENT"
-            color = {color: "yellow"}
+            text = "FAST"
+            style[color] = "yellow"
         }
 
         else if (relativeSpeed === "fast") {
-            text = "FAST"
-            color = {color: "cornflowerblue"}
+            text = "ADVANCED"
+            style[color] = "cornflowerblue"
         }
 
         else if (relativeSpeed === "pro") {
-            text = "pro"
-            color = {color: "purple"}
+            text = "PRO"
+            style[color] = "purple"
         }
 
         return (
-            <h2 style={color}>{text}</h2>
+            <h2 style={style}>{text}</h2>
         )
     }
 
