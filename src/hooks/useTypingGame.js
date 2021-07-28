@@ -112,7 +112,7 @@ function useTypingGame(startingTime = 15) {
         //grabbing text input as string, calculate number of words,
         //then store it to wordCount state
         setWordCount(calculateWordCount(text))
-        const typingSpeed = calculateTypingSpeed(text, startingTime)
+        const typingSpeed = calculateTypingSpeed(calculateWordCount(text), startingTime)
         setWordsPerMinute(typingSpeed)
         setRelativeSpeed(calculateRelativeSpeed(typingSpeed))
     }
