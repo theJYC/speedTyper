@@ -42,16 +42,16 @@ function useTypingGame(startingTime = 15) {
     }
 
     function calculateRelativeSpeed(number) {
-        if (number < 25) {
+        if (number < 45) {
             return "slow"
         }
-        else if (number < 45) {
+        else if (number < 60) {
             return "avg"
         }
-        else if (number < 60) {
+        else if (number < 80) {
             return "fluent"
         }
-        else if (number < 80) {
+        else if (number < 100) {
             return "fast"
         }
         else {
