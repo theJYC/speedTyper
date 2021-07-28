@@ -108,13 +108,16 @@ function useTypingGame(startingTime = 15) {
     }
 
     function endGame() {
+        const newWordCount = calculateWordCount(text)
+        const newTypingSpeed = calculateTypingSpeed(newWordCount, startingTime)
+
+        //store newly recorded metrics into their respective states
+        setWordCount(newWordCount)
+        setWordsPerMinute(newTypingSpeed)
+        setRelativeSpeed(calculateRelativeSpeed(newTypingSpeed))
+
+        //ensuring that game pauses and typing textarea is disabled
         setIsTimeRunning(false)
-        //grabbing text input as string, calculate number of words,
-        //then store it to wordCount state
-        setWordCount(calculateWordCount(text))
-        const typingSpeed = calculateTypingSpeed(calculateWordCount(text), startingTime)
-        setWordsPerMinute(typingSpeed)
-        setRelativeSpeed(calculateRelativeSpeed(typingSpeed))
     }
 
     //useEffect to run first when component updates,
