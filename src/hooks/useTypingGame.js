@@ -16,8 +16,8 @@ function useTypingGame(startingTime = 15) {
     const [wordsPerMinute, setWordsPerMinute] = useState(0)
     const [relativeSpeed, setRelativeSpeed] = useState("")
 
-    //grabbing textarea dom element in order to be auto-focused in upon START btn click
-    //standard practice to set useRef to null.
+    //grabbing reference to textarea dom element in order to be auto-focused in upon START btn click
+    //standard practice to initialise useRef passing in null.
     const textBoxRef = useRef(null)
 
     function handleChange(event) {
@@ -35,8 +35,10 @@ function useTypingGame(startingTime = 15) {
         return spaceRemoved.length
     }
 
-    function calculateTypingSpeed(number) {
-        return wordCount * 4
+    //determining the multiplier for the words per minute calculation
+    function calculateTypingSpeed(wordCount, startingTime) {
+        const secondsToMin = 60 / startingTime
+        return wordCount * secondsToMin
     }
 
     function calculateRelativeSpeed(number) {
@@ -110,21 +112,23 @@ function useTypingGame(startingTime = 15) {
         //grabbing text input as string, calculate number of words,
         //then store it to wordCount state
         setWordCount(calculateWordCount(text))
-        setWordsPerMinute(calculateTypingSpeed(text))
-        setRelativeSpeed(calculateRelativeSpeed(calculateTypingSpeed(text)))
+        const typingSpeed = calculateTypingSpeed(text, startingTime)
+        setWordsPerMinute(typingSpeed)
+        setRelativeSpeed(calculateRelativeSpeed(typingSpeed))
     }
 
-    //useEffect is run when component updates,
-    //and then when values of timeRemaining and isTimeRunning states change
+    //useEffect to run first when component updates,
+    //and when ([timeRemaining, isTimeRunning]) states change
     useEffect(() => {
-        //if start state value equals true (aka start button is clicked) && time > 0 (i.e. count still running)::
+        //if start state value equals true (aka start button is clicked) && time > 0 (i.e. count still running)
         if (isTimeRunning && timeRemaining > 0) {
             //setTimeout to run every 1000ms (1s)
             setTimeout(() => {
                 setTimeRemaining(time => time - 1)
             }, 1000)
         }
-        //when count reaches 0, set the isTimeRunning variable back to false:
+        //when count reaches 0, set the isTimeRunning variable back to false
+        //and store to state the calculated metrics
         else if (timeRemaining === 0) {
             endGame()
         }
