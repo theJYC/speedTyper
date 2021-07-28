@@ -49,10 +49,10 @@ function useTypingGame(startingTime = 15) {
             return "avg"
         }
         else if (number < 80) {
-            return "fluent"
+            return "fast"
         }
         else if (number < 100) {
-            return "fast"
+            return "advanced"
         }
         else {
             return "pro"
@@ -77,12 +77,12 @@ function useTypingGame(startingTime = 15) {
             style["color"] = "orange"
         }
 
-        else if (relativeSpeed === "fluent") {
+        else if (relativeSpeed === "fast") {
             text = "FAST"
             style["color"] = "yellow"
         }
 
-        else if (relativeSpeed === "fast") {
+        else if (relativeSpeed === "advanced") {
             text = "ADVANCED"
             style["color"] = "cornflowerblue"
         }
