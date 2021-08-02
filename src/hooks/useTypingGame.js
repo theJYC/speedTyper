@@ -42,21 +42,11 @@ function useTypingGame(startingTime = 15) {
     }
 
     function calculateRelativeSpeed(number) {
-        if (number < 45) {
-            return "slow"
-        }
-        else if (number < 60) {
-            return "avg"
-        }
-        else if (number < 80) {
-            return "fast"
-        }
-        else if (number < 100) {
-            return "advanced"
-        }
-        else {
-            return "pro"
-        }
+        if (number < 45) return "slow"
+        else if (number < 60) return "avg"
+        else if (number < 80) return "fast"
+        else if (number < 100) return "advanced"
+        else return "pro"
     }
 
     //to conditionally render the relativeSpeed text, with its respective color scheme
